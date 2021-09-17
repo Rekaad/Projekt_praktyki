@@ -1,25 +1,28 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import Card from "../ui/Card";
 
 
 function NewTestForm(){
 
   const [form, setForm] = useState([]);
-
+  const [nazwatest, setTitle] = useState("");
+  const [haslotest, setHaslo] = useState("");
+  const [przedmiotid, setPrzedmiot] = useState("1");
+  const [uzytkownikid, setUzytykownik] = useState("1");
 
   const prevIsValid=()=> {
     if(form.length===0){
       return true;
     }
 
-    const someEmpty = form.some(item=>item.Tresc===''||item.Odp1===''||item.Odp2===''||item.Odp3===''||item.Odp4==='');
+    const someEmpty = form.some(item=>item.trescpytania===''||item.Odp1===''||item.Odp2===''||item.Odp3===''||item.Odp4==='');
 
     if(someEmpty){
       form.map((item,index)=>{
         const allPrev = [...form];
 
-        if(form[index].Tresc===''){
-          allPrev[index].errors.Tresc="Tresc wymagana";
+        if(form[index].trescpytania===''){
+          allPrev[index].errors.trescpytania="trescpytania wymagana";
         }
 
         if(form[index].Odp1===''){
@@ -52,7 +55,7 @@ function NewTestForm(){
   const handleAddLink = (e) => {
 
     const inputState={
-      Tresc: "",
+      trescpytania: "",
       Odp1: "",
       Odp2: "",
       Odp3: "",
@@ -60,7 +63,7 @@ function NewTestForm(){
       Poprawna:"",
 
       errors:{
-        Tresc: null,
+        trescpytania: null,
         Odp1: null,
         Odp2: null,
         Odp3: null,
@@ -124,25 +127,70 @@ function NewTestForm(){
 
   };
 
+  const onSubmitForm = async e => {
+    e.preventDefault();
+    
+    try {
+      const body = {nazwatest,przedmiotid,haslotest,uzytkownikid};
+      const response = await fetch("http://localhost:5000/test",{
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify(body)
+      });
+      window.location = "/Pytania";
+/*
+      const bodypytanie = {...form};
+      const responsepytanie = await fetch("http://localhost:5000/pytanie",{
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify(bodypytanie)
+      });
+*/
+      
+      console.log(response);
+      console.log(body);
+/*
+      console.log(Object.keys(bodypytanie).length);
+      console.log(bodypytanie);
+     console.log(responsepytanie);
+*/
+      const responsetesty = await fetch("http://localhost:5000/test")
+        const jsonData = await responsetesty.json();
+        //const last = jsonData[last.length - 1]
+        console.log(jsonData);
+
+      //window.location = "/new-test";
+    } catch (err) {
+      console.error(err.message);
+    }
+
+   
+  
+    
+  };
+
+
+
+
     return (
         <Card>
-          <form>
+          <form onSubmit={onSubmitForm}>
             <div>
-              <label htmlFor='title'> Nazwa testu: </label>
-              <input type='text' required id='title'/>
+              <label htmlFor='titlelabel'> Nazwa testu: </label>
+              <input type='text' required value={nazwatest} onChange={e => setTitle(e.target.value)}/>
             </div>
             <div>
               <label htmlFor='subject'> Przedmiot: </label>
-              <select id="subjects" name='subjects'>
-                  <option id='1'>Matematyka</option>
-                  <option id='2'>Przyroda</option>
-                  <option id='3'>Chemia</option>
-                  <option id='4'>Fizyka</option>
+              <select id="subjects" name='subjects' value={przedmiotid} onChange={e => {const wybrane = e.target.value; setPrzedmiot(wybrane);}}>
+                  <option value='1'>Matematyka</option>
+                  <option value='2'>Przyroda</option>
+                  <option value='3'>Chemia</option>
+                  <option value='4'>Fizyka</option>
               </select>
             </div>    
             <div>
-              <label htmlFor='description'>Description: </label>
-              <textarea id="description" rows='2'></textarea>
+              <label htmlFor='haslo'>Haslo: </label>
+              <input type='text' value={haslotest} onChange={e => setHaslo(e.target.value)}/>
             </div>
             <div>
 
@@ -152,22 +200,22 @@ function NewTestForm(){
 
               {form.map((item,index)=><div key={`item-${index}`}>
                 <div>
-                <label htmlFor='Tresc'>Tresc pytania {index+1}: </label>
+                <label htmlFor='trescpytania'>trescpytania pytania {index+1}: </label>
                 <input type="text"
-                       name="Tresc" 
+                       name="trescpytania" 
                        className={
-                         item.errors.Tresc
+                         item.errors.trescpytania
                          ?"klasa-jest-zle" 
                          :"klasa-dobra"
                        }
-                       placeholder="Tresc pytania" 
-                       value={item.Tresc} 
+                       placeholder="trescpytania pytania" 
+                       value={item.trescpytania} 
                        onChange={(e)=>onChange(index,e)}
 
                 />
-                 {item.errors.Tresc&&( <div className="znowu-zle">
+                 {item.errors.trescpytania&&( <div className="znowu-zle">
                       
-                      {item.errors.Tresc}
+                      {item.errors.trescpytania}
 
                  </div>)} 
 
@@ -266,7 +314,7 @@ function NewTestForm(){
                 <button type="button" onClick={handleAddLink}>Dodaj pytanie</button>
             </div>
             <div>
-                <button onClick={handleFormSubmit}>Stwórz test</button>
+                <button>Stwórz test</button>
             </div>
           </form>
         </Card>

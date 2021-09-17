@@ -11,37 +11,89 @@ app.use(express.json());
 
 //create todo
 
-app.post("/tabtest", async(req,res) => {
+app.post("/test", async(req,res) => {
 
     try {
-        const {opis} = req.body;
-        const newTodo = await pool.query("INSERT INTO tabtest (opis) VALUES($1) RETURNING *",[opis]);
-        res.json(newTodo.rows[0]);
+        const {nazwatest,przedmiotid,haslotest} = req.body;
+        const newTodo = await pool.query("INSERT INTO test (nazwatest,haslotest,przedmiotid) VALUES($1,$2,$3) RETURNING *",[nazwatest,haslotest,przedmiotid]);
+        res.json(newTodo.rows);
     } catch (err) {
         console.error(err.message);
     }
 
 })
 
+app.post("/pytanie", async(req,res) => {
+    var dlugosc = Object.keys(req.body).length;
+    var last = req.body[-1];
+    for(var i=0; i<=dlugosc;i++){
+
+        try {
+            const {trescpytania,Odp1,Odp2,Odp3,Odp4,Poprawna} = req.body[i];
+            console.log(trescpytania);
+            const {last} = req.body;
+            console.log(last.testid);
+            const newTodo = await pool.query("INSERT INTO pytanie (trescpytania,odpowiedz1,odpowiedz2,odpowiedz3,odpowiedz4,poprawna,testid) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING *",[trescpytania,Odp1,Odp2,Odp3,Odp4,Poprawna,last.testid]);
+            res.json(newTodo.rows[i]);
+        } catch (err) {
+            console.error(err.message);
+        }
+
+    }
+    
+
+})
 
 //get all todo
 
-app.get("/tabtest", async(req,res) => {
+app.get("/test", async(req,res) => {
     try {
-        const allTodos = await pool.query("SELECT * FROM tabtest");
+        const allTodos = await pool.query("SELECT * FROM test");
         res.json(allTodos.rows);
     } catch (err) {
         console.error(err.message);
     }
 });
 
+app.get("/pytanie", async(req,res) => {
+    try {
+        const allTodos = await pool.query("SELECT * FROM pytanie");
+        res.json(allTodos.rows);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
+//get a todo where przedmiotid
+
+app.get("/test/przedmiotid/:id", async(req,res) =>{
+    try {
+        const {id} = req.params;
+        const todo = await pool.query("SELECT * FROM test WHERE przedmiotid = $1", [id]);
+
+        res.json(todo.rows);
+    } catch (err) {
+        console.error(err.message);
+    }
+})
+
+app.get("/pytanie/testid/:id", async(req,res) =>{
+    try {
+        const {id} = req.params;
+        const todo = await pool.query("SELECT * FROM pytanie WHERE testid = $1", [id]);
+
+        res.json(todo.rows);
+    } catch (err) {
+        console.error(err.message);
+    }
+})
 
 //get a todo
 
-app.get("/tabtest/:id", async(req,res) =>{
+app.get("/test/:id", async(req,res) =>{
     try {
         const {id} = req.params;
-        const todo = await pool.query("SELECT * FROM tabtest WHERE tab_id = $1", [id]);
+        const todo = await pool.query("SELECT * FROM test WHERE testid = $1", [id]);
 
         res.json(todo.rows[0]);
     } catch (err) {
@@ -51,11 +103,11 @@ app.get("/tabtest/:id", async(req,res) =>{
 
 //update todo
 
-app.put("/tabtest/:id", async(req,res)=>{
+app.put("/test/:id", async(req,res)=>{
     try {
         const {id} = req.params;
         const {opis} = req.body;
-        const updateTodo = await pool.query("UPDATE tabtest SET opis = $1 WHERE tab_id = $2",[opis,id]);
+        const updateTodo = await pool.query("UPDATE test SET opis = $1 WHERE testid = $2",[opis,id]);
 
         res.json("todo was updated");
     } catch (err) {
@@ -65,10 +117,10 @@ app.put("/tabtest/:id", async(req,res)=>{
 
 //delete todo
 
-app.delete("/tabtest/:id", async(req,res)=>{
+app.delete("/test/:id", async(req,res)=>{
     try {
         const {id} = req.params;
-        const deleteTodo = await pool.query("DELETE FROM tabtest WHERE tab_id = $1",[id]);
+        const deleteTodo = await pool.query("DELETE FROM test WHERE testid = $1",[id]);
         res.json("todo was deleted");
     } catch (err) {
         console.error(err.message);

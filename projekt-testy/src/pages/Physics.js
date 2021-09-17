@@ -1,11 +1,9 @@
+import ListTesty from "../components/layout/subjects/ListTesty";
 import PrzyciskWstecz from "../components/layout/ui/Przycisk";
 
 function ShowPhysicsSite(){
 
-    return <div>
-    <PrzyciskWstecz/>
-     <p>Fizyka</p>
-     </div>;
+    return <ListTesty idta="4"/>
 
 }
 
