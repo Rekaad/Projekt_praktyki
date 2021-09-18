@@ -9,6 +9,9 @@ import ShowNatureSite from "./pages/Nature";
 import ShowChemistrySite from "./pages/Chemistry";
 import ShowPhysicsSite from "./pages/Physics";
 import Login from "./pages/Logowanie";
+import AddPytania from "./components/layout/subjects/AddPytania";
+import ShowTest from "./components/layout/subjects/ShowTest";
+import SolveTest from "./components/layout/subjects/SolveTest";
 
 function App() {
   return (
@@ -45,6 +48,18 @@ function App() {
 
       <Route path="/Fizyka">
         <ShowPhysicsSite/>
+      </Route>
+
+      <Route path="/Pytania">
+        <AddPytania/>
+      </Route>
+
+      <Route path="/Show">
+        <ShowTest/>
+      </Route>
+      
+      <Route path="/Solve">
+        <SolveTest/>
       </Route>
 
       </Switch>

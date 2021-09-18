@@ -1,11 +1,9 @@
+import ListTesty from "../components/layout/subjects/ListTesty";
 import PrzyciskWstecz from "../components/layout/ui/Przycisk";
 
 function ShowChemistrySite(){
 
-    return <div>
-    <PrzyciskWstecz/>
-     <p>Chemia</p>
-     </div>;
+    return <ListTesty idta="3"/>
 
 }
 

@@ -1,12 +1,9 @@
+import ListTesty from "../components/layout/subjects/ListTesty";
 import PrzyciskWstecz from "../components/layout/ui/Przycisk";
 
 function ShowNatureSite(){
 
-    return <div> 
-    <PrzyciskWstecz/>
-    <p>Nature site </p>
-    </div>;
-
+    return <ListTesty idta="2"/>
 }
 
 export default ShowNatureSite;
