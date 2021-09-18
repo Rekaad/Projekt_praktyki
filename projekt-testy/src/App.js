@@ -8,6 +8,7 @@ import ShowMathSite from "./pages/Math";
 import ShowNatureSite from "./pages/Nature";
 import ShowChemistrySite from "./pages/Chemistry";
 import ShowPhysicsSite from "./pages/Physics";
+import Login from "./pages/Logowanie";
 
 function App() {
   return (
@@ -26,6 +27,10 @@ function App() {
         <FavoriteTests/>
       </Route>
       
+      <Route path="/login">
+        <Login/>
+      </Route>
+
       <Route path="/Matematyka">
         <ShowMathSite/>
       </Route>

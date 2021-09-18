@@ -19,6 +19,9 @@ function NavigationBar() {
           <li>
             <Link to="/favorites"> Ulubione </Link>
           </li>
+          <li>
+            <Link to="/login"> Zaloguj </Link>
+          </li>
         </ul>
       </nav>
     </header>
