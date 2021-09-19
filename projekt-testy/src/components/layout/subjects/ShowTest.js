@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import EditTest from "./EditTest";
 import Card from "../ui/Card";
 import PrzyciskWstecz from "../ui/Przycisk";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import ListTesty from "./ListTesty";
 
 function ShowTest(props){
   
@@ -10,6 +11,9 @@ function ShowTest(props){
   //const idta = props;
  
 
+  const location = useLocation();
+  const dataId = location.state;
+  
 
   const getPytania = async(idt) => {
       // testy.przedmiotid;
@@ -19,6 +23,11 @@ function ShowTest(props){
         //const last = jsonData[last.length - 1]
         //console.log(jsonData);
         setPytania(jsonData);
+       
+          
+        
+      //console.log(dataId);
+
     } catch (err) {
       console.error(err.message);
     }
@@ -26,9 +35,11 @@ function ShowTest(props){
   }
 
   useEffect(() =>{
-    getPytania("2");
+    console.log(dataId);
+    getPytania(dataId);
+    
   },[]);
-  console.log(pytania);
+  //console.log(pytania);
 
   return (
     <section>
@@ -37,8 +48,10 @@ function ShowTest(props){
       
       <table class="table">
   <thead>
+  <tr>{}</tr>
     <tr>
       <br></br><th scope="col">Tresc</th>
+
       <th scope="col">Odpowiedź 1</th>
       <th scope="col">Odpowiedź 2</th>
       <th scope="col">Odpwoiedź 3</th>
