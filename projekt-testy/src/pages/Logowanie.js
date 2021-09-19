@@ -22,7 +22,7 @@ function Login(){
                 console.log(response);
             }else {
                 console.log(response);
-            
+            //setLoginStatus(response.data[0].login);
             window.location.reload(false);
             window.location = "/";
         }
@@ -32,7 +32,7 @@ function Login(){
     useEffect(() => {
         Axios.get("http://localhost:5000/logins").then((response) => {
           if (response.data.loggedIn == true) {
-            setLoginStatus(response.data.user[0].login);
+            //setLoginStatus(response.data.user[0].login);
             console.log(response);
 
             

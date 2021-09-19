@@ -1,7 +1,7 @@
 import { Route, Switch } from "react-router-dom";
 
 import AllTests from "./pages/AllTests";
-import FavoriteTests from "./pages/FavoriteTests";
+import Profil from "./pages/Profil";
 import NewTest from "./pages/NewTest";
 import Layout from "./components/layout/Layout";
 import ShowMathSite from "./pages/Math";
@@ -27,8 +27,8 @@ function App() {
         <NewTest/>
       </Route>
 
-      <Route path="/favorites">
-        <FavoriteTests/>
+      <Route path="/profil">
+        <Profil/>
       </Route>
       
       <Route path="/login">

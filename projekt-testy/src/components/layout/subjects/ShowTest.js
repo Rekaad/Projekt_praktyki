@@ -26,7 +26,7 @@ function ShowTest(props){
   }
 
   useEffect(() =>{
-    getPytania("35");
+    getPytania("2");
   },[]);
   console.log(pytania);
 

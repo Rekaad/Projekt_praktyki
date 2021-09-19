@@ -159,14 +159,17 @@ app.post('/register', (req,res)=>{
    
     const login =req.body.login;
     const haslo =req.body.haslo;
+    const email =req.body.email;
+    const imie =req.body.imie;
+    const nazwisko =req.body.nazwisko;
  
     bcrypt.hash(haslo, saltRounds, (err, hash) => {
         if (err) {
           console.log(err);
         }
      pool.query(
-         "INSERT INTO uzytkownik (login, haslo) VALUES ($1,$2)",
-         [login, hash],
+         "INSERT INTO uzytkownik (login, haslo,email,imie,nazwisko) VALUES ($1,$2,$3,$4,$5)",
+         [login, hash,email,imie,nazwisko],
          (err,result)=>{
          //console.log(err);
          console.log(result);
@@ -233,7 +236,19 @@ app.post('/register', (req,res)=>{
         });
 
 
-
+        app.get("/info", async(req,res) =>{
+            
+                const login =req.body.login;
+                pool.query(
+                    "SELECT * FROM uzytkownik WHERE login =$1",
+                    [login],
+                    (err,result)=> {
+                          res.send(result.rows);
+                        
+                        console.log(result);
+                });
+                
+            });
 
 app.listen(5000, ()=> {
     console.log("serwer wystartowal na porcie 5000");

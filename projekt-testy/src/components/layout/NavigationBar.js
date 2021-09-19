@@ -65,7 +65,7 @@ function NavigationBar() {
             </li>
   
             <li>
-              <Link to="/favorites"> Ulubione </Link>
+              <Link to="/profil">Mój profil </Link>
             </li>
            {/*<li>
               <h1>{username}</h1>

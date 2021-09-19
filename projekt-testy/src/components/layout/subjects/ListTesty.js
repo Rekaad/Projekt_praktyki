@@ -10,6 +10,8 @@ function ListTesty(props){
   const [testy,setTesty] = useState([]);
   //const idta = props;
   //usuwanie testu
+
+
   const [role, setRole] = useState("");
 
 
@@ -56,7 +58,9 @@ function ListTesty(props){
   useEffect(() =>{
     getTesty(props.idta);
   },[]);
+
   console.log(testy);
+
   if(role == "logged"){
     return (
     <section>
@@ -73,12 +77,6 @@ function ListTesty(props){
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    
     {testy.map(test => (
       <tr key={test.testid}>
         <td>{test.nazwatest}</td>
