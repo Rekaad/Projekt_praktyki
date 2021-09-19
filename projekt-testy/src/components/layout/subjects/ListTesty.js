@@ -34,6 +34,7 @@ function ListTesty(props){
       const deteleTest = await fetch(`http://localhost:5000/test/${id}`,{
         method: "DELETE"
       })
+      console.log(deteleTest);
       setTesty(testy.filter(test => test.testid !== id));
     } catch (err) {
       console.error(err.message);
