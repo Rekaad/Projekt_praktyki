@@ -3,9 +3,36 @@ const app = express();
 const cors = require("cors");
 const pool = require("./db");
 
-app.use(cors());
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+
+app.use(cors({
+    origin: ["http://localhost:3000"],
+    methods: ["GET", "POST"],
+    credentials: true,
+  }));
 app.use(express.json());
 
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(
+    session({
+      key: "userId",
+      secret: "subscribe",
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+        expires: 60 * 60 * 24,
+      },
+    })
+  );
+
+
+  
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 //ROUTES//
 
@@ -14,8 +41,8 @@ app.use(express.json());
 app.post("/test", async(req,res) => {
 
     try {
-        const {nazwatest,przedmiotid,haslotest} = req.body;
-        const newTodo = await pool.query("INSERT INTO test (nazwatest,haslotest,przedmiotid) VALUES($1,$2,$3) RETURNING *",[nazwatest,haslotest,przedmiotid]);
+        const {nazwatest,przedmiotid,haslotest,uzytkownikid} = req.body;
+        const newTodo = await pool.query("INSERT INTO test (nazwatest,haslotest,przedmiotid,uzytkownikid) VALUES($1,$2,$3,$4) RETURNING *",[nazwatest,haslotest,przedmiotid,uzytkownikid]);
         res.json(newTodo.rows);
     } catch (err) {
         console.error(err.message);
@@ -120,25 +147,55 @@ app.put("/test/:id", async(req,res)=>{
 app.delete("/test/:id", async(req,res)=>{
     try {
         const {id} = req.params;
-        const deleteTodo = await pool.query("DELETE FROM test WHERE testid = $1",[id]);
+        const deleteTodo = await pool.query("DELETE FROM test WHERE testid = '1'");
         res.json("todo was deleted");
     } catch (err) {
         console.error(err.message);
     }
 })
 
+
 app.post('/register', (req,res)=>{
    
     const login =req.body.login;
     const haslo =req.body.haslo;
  
+    bcrypt.hash(haslo, saltRounds, (err, hash) => {
+        if (err) {
+          console.log(err);
+        }
      pool.query(
          "INSERT INTO uzytkownik (login, haslo) VALUES ($1,$2)",
-         [login, haslo],
+         [login, hash],
          (err,result)=>{
-         console.log(err);
-     });
+         //console.log(err);
+         console.log(result);
+            if(err)
+            {
+                res.send({ message: "Użytkownik już istnieje" });
+            }else{
+                res.send(result);
+            }
+     }
+     );
+    });
  });
+
+ app.get("/logins", (req, res) => {
+    if (req.session.user) {
+      res.send({ loggedIn: true, user: req.session.user });
+    } else {
+      res.send({ loggedIn: false });
+    }
+  });
+
+  app.get("/logout", (req, res) => {
+    
+      res.send({ loggedIn: false});
+      req.session.destroy();
+    
+  });
+
 
  app.post('/logins', (req,res)=>{
    
@@ -147,24 +204,33 @@ app.post('/register', (req,res)=>{
     
     
      pool.query(
-         "SELECT * FROM uzytkownik WHERE login =$1 AND haslo =$2",
-         [login, haslo],
+         "SELECT * FROM uzytkownik WHERE login =$1",
+         [login],
          (err,result)=> {
              if(err)
             {
                res.send({ err: err});
              } 
              
+
              if(result.rows.length >0){
-                 res.send(result.rows);
-             }else{
+                bcrypt.compare(haslo, result.rows[0].haslo, (error, response) => {
+
+                if (response) {
+                    req.session.user= result.rows;
+                    console.log(req.session.user);
+                    res.send(result.rows);
+                  } else {
+                    res.send({ message: "Zły login lub hasło" });
+                  }
+                });
+              } else {
                 
-                 res.send({message: "Zly login lub haslo"});
-             }
-             console.log(result);
-     });
-     
- });
+                res.send({ message: "Użytkownik nie istnieje" });
+              }
+            }
+          );
+        });
 
 
 
