@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import Card from "../ui/Card";
-
+import Axios from 'axios'
+import classes from "./NewTestForm.module.css";
 
 function NewTestForm(){
 
@@ -8,7 +9,18 @@ function NewTestForm(){
   const [nazwatest, setTitle] = useState("");
   const [haslotest, setHaslo] = useState("");
   const [przedmiotid, setPrzedmiot] = useState("1");
-  const [uzytkownikid, setUzytykownik] = useState("1");
+  const [uzytkownikid, setUzytykownik] = useState('');
+
+
+  useEffect(() => {
+    Axios.get("http://localhost:5000/logins").then((response) => {
+      if (response.data.loggedIn == true) {
+        setUzytykownik(response.data.user[0].uzytkownikid);
+        console.log(response.data.user[0].uzytkownikid);
+        
+      }
+    });
+  }, []);
 
   const prevIsValid=()=> {
     if(form.length===0){
@@ -174,14 +186,15 @@ function NewTestForm(){
 
     return (
         <Card>
-          <form onSubmit={onSubmitForm}>
+          <h1>Tworzenie nowego testu</h1>
+          <form onSubmit={onSubmitForm} className={classes.content}>
             <div>
               <label htmlFor='titlelabel'> Nazwa testu: </label>
               <input type='text' required value={nazwatest} onChange={e => setTitle(e.target.value)}/>
             </div>
             <div>
               <label htmlFor='subject'> Przedmiot: </label>
-              <select id="subjects" name='subjects' value={przedmiotid} onChange={e => {const wybrane = e.target.value; setPrzedmiot(wybrane);}}>
+              <select id="subjects" name='subjects' value={przedmiotid} onChange={e => {const wybrane = e.target.value; setPrzedmiot(wybrane);} }>
                   <option value='1'>Matematyka</option>
                   <option value='2'>Przyroda</option>
                   <option value='3'>Chemia</option>
@@ -199,7 +212,7 @@ function NewTestForm(){
               {/*JSON.stringify(form)*/}
 
               {form.map((item,index)=><div key={`item-${index}`}>
-                <div>
+                <div >
                 <label htmlFor='trescpytania'>trescpytania pytania {index+1}: </label>
                 <input type="text"
                        name="trescpytania" 
@@ -310,11 +323,9 @@ function NewTestForm(){
 
             </div>
 
+            
             <div>
-                <button type="button" onClick={handleAddLink}>Dodaj pytanie</button>
-            </div>
-            <div>
-                <button>Stwórz test</button>
+                <button class="button buttonP" >Stwórz test</button>
             </div>
           </form>
         </Card>

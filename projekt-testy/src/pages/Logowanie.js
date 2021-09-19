@@ -1,24 +1,16 @@
-import React,{ useState } from "react";
+import React, { useEffect, useState } from "react";
 import Axios from 'axios'
+import { Link } from "react-router-dom";
 
 function Login(){
-
-    const [usernameReg, setUsernameReg] = useState('');
-    const [passwordReg, setPasswordReg] = useState('');
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const [loginStatus, setLoginStatus] = useState('');
 
-    const register = () => {
-        Axios.post("http://localhost:5000/register",{
-            login: usernameReg,
-            haslo: passwordReg,
-        }).then((response) => {
-            console.log(response);
-        });
-    };
+    Axios.defaults.withCredentials = true;
+
 
     const logins = () => {
         Axios.post("http://localhost:5000/logins",{
@@ -30,48 +22,49 @@ function Login(){
                 console.log(response);
             }else {
                 console.log(response);
-            setLoginStatus(response.data[0].login);
+            
+            window.location.reload(false);
+            window.location = "/";
         }
         });
     };
 
+    useEffect(() => {
+        Axios.get("http://localhost:5000/logins").then((response) => {
+          if (response.data.loggedIn == true) {
+            setLoginStatus(response.data.user[0].login);
+            console.log(response);
+
+            
+          }
+        });
+      }, []);
+
+      
+
     return (
         <div className="Login">
-            <div className="registration">
-                <h1>Rejestracja</h1>
-                <label>Username</label>
-                <input
-                 type="text"
-                 onChange={(e) =>{
-                    setUsernameReg(e.target.value);
-                 }} />
-                <label>Password</label>
-                <input 
-                    type="text" 
-                    onChange={(e) =>{
-                    setPasswordReg(e.target.value);
-                 }} />
-                <button onClick={register}> Register </button>
-            </div>
-
-
+           
             <div className= "log">
                 <h1>Logowanie</h1>
+                <label>Login</label>
                 <input 
                     type="text" 
-                    placeholder="Username..."
                     onChange={(e) => {
                     setUsername(e.target.value);
                  }}  />
+                 <label>Hasło</label>
                 <input 
                     type="password" 
-                    placeholder="Password..." 
                     onChange={(e) => {
                     setPassword(e.target.value);
                  }}  />
                 <button onClick={logins}> Zaloguj </button>
             </div>
             <h1>{loginStatus}</h1>
+            <h2>Nie masz konta?
+            <Link to="/registration"> Zarejestruj się!</Link>
+          </h2>
          </div>
     );
 

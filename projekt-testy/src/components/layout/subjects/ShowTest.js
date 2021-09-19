@@ -29,15 +29,16 @@ function ShowTest(props){
     getPytania("35");
   },[]);
   console.log(pytania);
+
   return (
     <section>
       <PrzyciskWstecz />
       <Card>
-
+      
       <table class="table">
   <thead>
     <tr>
-      <th scope="col">Tresc</th>
+      <br></br><th scope="col">Tresc</th>
       <th scope="col">Odpowiedź 1</th>
       <th scope="col">Odpowiedź 2</th>
       <th scope="col">Odpwoiedź 3</th>

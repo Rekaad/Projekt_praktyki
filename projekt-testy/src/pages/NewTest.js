@@ -3,7 +3,7 @@ import NewTestForm from "../components/layout/subjects/NewTestForm";
 function NewTest(){
 
     return <div> 
-    <p>Add new test</p>
+    <p></p>
     <NewTestForm/>
     </div>;
 }

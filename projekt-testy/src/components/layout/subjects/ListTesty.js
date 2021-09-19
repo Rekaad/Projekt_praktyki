@@ -3,12 +3,28 @@ import EditTest from "./EditTest";
 import Card from "../ui/Card";
 import PrzyciskWstecz from "../ui/Przycisk";
 import { Link } from "react-router-dom";
+import Axios from "axios";
 
 function ListTesty(props){
   
   const [testy,setTesty] = useState([]);
   //const idta = props;
   //usuwanie testu
+  const [role, setRole] = useState("");
+
+
+  Axios.defaults.withCredentials = true;
+  useEffect(() => {
+    Axios.get("http://localhost:5000/logins").then((response) => {
+      if (response.data.loggedIn == true) {
+        setRole("logged");
+      }
+      else{
+        setRole("visitor");
+      }
+    });
+  }, []);
+
 
   const deleteTest = async(id) => {
 
@@ -41,18 +57,19 @@ function ListTesty(props){
     getTesty(props.idta);
   },[]);
   console.log(testy);
-  return (
+  if(role == "logged"){
+    return (
     <section>
       <PrzyciskWstecz />
       <Card>
-
+      <h1>Lista Testów</h1>
       <table class="table">
   <thead>
     <tr>
-      <th scope="col">Nazwa(moze podglad po kliknieciu)</th>
-      <th scope="col">Edycja</th>
-      <th scope="col">Usuwanie</th>
-      <th scope="col">Podgląd</th>
+      <th scope="col">Nazwa(moze podglad po kliknieciu) </th>
+      <th scope="col"> Edycja</th>
+      <th scope="col"> Usuwanie</th>
+      <th scope="col"> Podgląd</th>
     </tr>
   </thead>
   <tbody>
@@ -61,11 +78,7 @@ function ListTesty(props){
       <td>Otto</td>
       <td>@mdo</td>
     </tr>
-    {/*<tr>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr> */}
+    
     {testy.map(test => (
       <tr key={test.testid}>
         <td>{test.nazwatest}</td>
@@ -84,6 +97,40 @@ function ListTesty(props){
 
     </section>
   );
+  }else
+  {
+    return (
+      <section>
+        <PrzyciskWstecz />
+        <Card>
+        <h1>Lista Testów</h1>
+        <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nazwa(moze podglad po kliknieciu) </th>
+        
+        <th scope="col"> Podgląd</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      {testy.map(test => (
+        <tr key={test.testid}>
+          <td>{test.nazwatest}</td>
+          <td><button><Link to="/Solve"> Rozwiaz </Link></button></td>
+        </tr>
+      ))}
+      
+    </tbody>
+  </table>
+  
+        </Card>
+        
+  
+      </section>
+    );
+  }
+
 };
 
 export default ListTesty;

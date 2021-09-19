@@ -9,6 +9,7 @@ import ShowNatureSite from "./pages/Nature";
 import ShowChemistrySite from "./pages/Chemistry";
 import ShowPhysicsSite from "./pages/Physics";
 import Login from "./pages/Logowanie";
+import Rejestracja from "./pages/Rejestracja";
 import AddPytania from "./components/layout/subjects/AddPytania";
 import ShowTest from "./components/layout/subjects/ShowTest";
 import SolveTest from "./components/layout/subjects/SolveTest";
@@ -32,6 +33,10 @@ function App() {
       
       <Route path="/login">
         <Login/>
+      </Route>
+
+      <Route path="/registration">
+        <Rejestracja/>
       </Route>
 
       <Route path="/Matematyka">

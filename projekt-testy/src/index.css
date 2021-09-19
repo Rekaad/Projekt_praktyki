@@ -1,6 +1,7 @@
 .App {
-    text-align: center;
-  }
+  text-align: center;
+  
+}
   
   .registration, .log {
     display: flex;
@@ -13,4 +14,135 @@
   input {
     width: 250px;
     height: 40px;
+    margin-bottom:10px;
+    font-size: 16px;
+    padding-left:  6px;
+    margin-bottom:10px
+  }
+
+  .registration button,.log button {
+    width: 320px;
+    height: 50px;
+    margin-top: 15px;
+    background-color: #77002e; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  } 
+
+   button:hover {
+    cursor: pointer;
+  }
+
+  .Login h2,h1 {
+    text-align: center;
+  } 
+
+  table{
+    
+    flex-direction: column;
+    padding-top: 1rem;
+    line-height: 1.6;
+    padding-right:  4rem;
+    padding-bottom:  8rem;
+    padding-left:  4rem;
+    
+  }
+
+  .table button {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    margin-top: 15px;
+    background-color: #ffffff; 
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border: 2px solid #000000;
+    opacity: 0.6;
+  } 
+
+ 
+  .table button:hover {
+    opacity: 10;
+  } 
+
+  .button1,.buttonT,.buttonU {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background-color: #77002e; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border: 2px solid #000000;
+    
+  } 
+ 
+
+  .buttonP {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    margin-top: 15px;
+    background-color: #77002e; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border: 2px solid #000000;
+    position: relative;
+    left: 180px;
+    
+  } 
+  .buttonT {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    margin-top: 15px;
+    background-color: #77002e; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border: 2px solid #000000;
+    
+  } 
+
+  .buttonW {
+    background-color: #77002e; 
+    border: none;
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: #fcb8d2;
+  }
+  .buttonW:hover {
+    color: white;
+  } 
+
+  select {
+    
+    background-color: #ffffff; 
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border: 2px solid #000000;
+    opacity: 0.6;
+    margin-bottom:10px;
   }

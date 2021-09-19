@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Card from "../ui/Card";
+import classes from "./AddPytania.module.css";
 
 function AddPytania() {
   const [form, setForm] = useState([]);
@@ -180,7 +181,8 @@ useEffect(() =>{
   return (
     <Card>
     <div> {getTesty} </div>
-      <div>
+    <h1>Dodawanie pytań do testu</h1>
+      <div className={classes.pytanie}>
         {/*JSON.stringify(form)*/}
         <form onSubmit={onSubmitForm}>
         {form.map((item, index) => (
@@ -283,16 +285,16 @@ useEffect(() =>{
                 <div className="znowu-zle">{item.errors.Poprawna}</div>
               )}
             </div>
-            <button onClick={(e) => handleRemoveField(e, index)}>
+            <button class="button buttonU" onClick={(e) => handleRemoveField(e, index)}>
               Usuń pytanie
             </button>
                 
           </div>
         ))}
         <div>
-                <button type="button" onClick={handleAddLink}>Dodaj pytanie</button>
+                <button class="button buttonT" type="button" onClick={handleAddLink}>Dodaj pytanie</button>
             </div>
-        <button>Zapisz pytania</button>
+        <button class="button buttonP">Zapisz pytania</button>
         </form>
       </div>
     </Card>

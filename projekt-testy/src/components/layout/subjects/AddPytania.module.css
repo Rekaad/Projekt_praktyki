@@ -1,4 +1,4 @@
-.content {
+.pytanie {
     padding-top: 1rem;
     line-height: 1.6;
     padding-right:  4rem;
@@ -7,8 +7,13 @@
     
   }
 
+  .pytanie buttonT{
+    position: relative;
+    left: 180px;
+    
+  }
   
-  .content label {
+  .pytanie label {
     width:180px;
     clear:left;
     text-align:right;
@@ -16,10 +21,10 @@
     font-size: 1.0rem;
 }
 
-.content input,.content label {
-    float:left;
-}
+.pytanie input,.pytanie label {
+        float:left;
+    }
 
-  h1{
-    padding-top: 1rem;
-  }
+    h1{
+        padding-top: 1rem;
+    }
