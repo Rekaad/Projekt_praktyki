@@ -127,6 +127,48 @@ app.delete("/test/:id", async(req,res)=>{
     }
 })
 
+app.post('/register', (req,res)=>{
+   
+    const login =req.body.login;
+    const haslo =req.body.haslo;
+ 
+     pool.query(
+         "INSERT INTO uzytkownik (login, haslo) VALUES ($1,$2)",
+         [login, haslo],
+         (err,result)=>{
+         console.log(err);
+     });
+ });
+
+ app.post('/logins', (req,res)=>{
+   
+    const login =req.body.login;
+    const haslo =req.body.haslo;
+    
+    
+     pool.query(
+         "SELECT * FROM uzytkownik WHERE login =$1 AND haslo =$2",
+         [login, haslo],
+         (err,result)=> {
+             if(err)
+            {
+               res.send({ err: err});
+             } 
+             
+             if(result.rows.length >0){
+                 res.send(result.rows);
+             }else{
+                
+                 res.send({message: "Zly login lub haslo"});
+             }
+             console.log(result);
+     });
+     
+ });
+
+
+
+
 app.listen(5000, ()=> {
     console.log("serwer wystartowal na porcie 5000");
 })
