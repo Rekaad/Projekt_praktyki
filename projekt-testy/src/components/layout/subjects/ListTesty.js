@@ -8,6 +8,7 @@ import Axios from "axios";
 function ListTesty(props){
   
   const [testy,setTesty] = useState([]);
+  
   //const idta = props;
   //usuwanie testu
 
