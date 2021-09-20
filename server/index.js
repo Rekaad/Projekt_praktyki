@@ -234,21 +234,64 @@ app.post('/register', (req,res)=>{
             }
           );
         });
+        app.post('/logins', (req,res)=>{
+   
+    const login =req.body.login;
+    const haslo =req.body.haslo;
+    
+    
+     pool.query(
+         "SELECT * FROM uzytkownik WHERE login =$1",
+         [login],
+         (err,result)=> {
+             if(err)
+            {
+               res.send({ err: err});
+             } 
+             
 
+             if(result.rows.length >0){
+                bcrypt.compare(haslo, result.rows[0].haslo, (error, response) => {
 
-        app.get("/info", async(req,res) =>{
-            
-                const login =req.body.login;
-                pool.query(
-                    "SELECT * FROM uzytkownik WHERE login =$1",
-                    [login],
-                    (err,result)=> {
-                          res.send(result.rows);
-                        
-                        console.log(result);
+                if (response) {
+                    req.session.user= result.rows;
+                    console.log(req.session.user);
+                    res.send(result.rows);
+                  } else {
+                    res.send({ message: "Zły login lub hasło" });
+                  }
                 });
+              } else {
                 
-            });
+                res.send({ message: "Użytkownik nie istnieje" });
+              }
+            }
+          );
+        });
+    
+     app.post('/hasloT', (req,res)=>{
+   
+            const haslo =req.body.haslo;
+            
+             pool.query(
+                 "SELECT * FROM test WHERE haslotest =$1",
+                 [haslo],
+                 (err,result)=> {
+                     if(err)
+                    {
+                       res.send({ err: err});
+                     } 
+                     if(result.rows.length >0){
+                       
+                            res.send(result.rows);
+                          
+                      } else {
+                        res.send({ message: "Błędne hasło" });
+                      }
+                    }
+                  );
+                });
+
 
 app.listen(5000, ()=> {
     console.log("serwer wystartowal na porcie 5000");

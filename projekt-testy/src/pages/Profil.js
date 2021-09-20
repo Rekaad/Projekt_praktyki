@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Axios from 'axios'
 import { Link } from "react-router-dom";
 
-
 function Profil(){
 
     const [loginStatus, setLoginStatus] = useState('');
@@ -18,32 +17,22 @@ function Profil(){
         Axios.get("http://localhost:5000/logins").then((response) => {
           if (response.data.loggedIn == true) {
             setLoginStatus(response.data.user[0].login);
+            setsurnameStatus(response.data.user[0].imie);
+            setnameStatus(response.data.user[0].nazwisko);
+            setemailStatus(response.data.user[0].email);
             console.log(response);
 
-            
           }
         });
       }, []);
 
-      
-  
-      useEffect(() =>  {
-        Axios.get("http://localhost:5000/info",{
-            login: loginStatus
-        }).then((response) => {
-            setnameStatus(response.imie);
-                console.log(response);
-            
-        
-        });
-    },[]);
 
-    return <div><h2>Zalogowany użytkownik: {loginStatus}</h2>
+    return <div class="profile" ><h1>Mój profil</h1>
+            <h2>Zalogowany użytkownik: {loginStatus}</h2>
             <h2>Imie: {nameStatus}</h2>
             <h2>Nazwisko: {surnameStatus}</h2>
             <h2>Email: {emailStatus}</h2>
-             </div>;
-
+             </div>
 
 }
 

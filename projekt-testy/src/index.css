@@ -146,3 +146,13 @@
     opacity: 0.6;
     margin-bottom:10px;
   }
+  .profile {
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    padding-top: 0rem;
+    line-height: 1.6;
+    padding-right:  4rem;
+    padding-bottom:  8rem;
+    padding-left:  2rem;
+  }
