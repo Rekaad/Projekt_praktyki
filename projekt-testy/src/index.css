@@ -53,7 +53,7 @@
     
   }
 
-  .table button {
+  .table button,.Password button {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     margin-top: 15px;
     background-color: #ffffff; 
@@ -146,7 +146,7 @@
     opacity: 0.6;
     margin-bottom:10px;
   }
-  .profile {
+  .profile ,.Password {
     background-color: white;
     border-radius: 6px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -155,4 +155,11 @@
     padding-right:  4rem;
     padding-bottom:  8rem;
     padding-left:  2rem;
+  }
+
+  .Password input{
+    margin-right:20px;
+    margin-left:60px;
+    justify-content: center;
+    align-items: center;
   }

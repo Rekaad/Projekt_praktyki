@@ -17,8 +17,8 @@ function Profil(){
         Axios.get("http://localhost:5000/logins").then((response) => {
           if (response.data.loggedIn == true) {
             setLoginStatus(response.data.user[0].login);
-            setsurnameStatus(response.data.user[0].imie);
-            setnameStatus(response.data.user[0].nazwisko);
+            setsurnameStatus(response.data.user[0].nazwisko);
+            setnameStatus(response.data.user[0].imie);
             setemailStatus(response.data.user[0].email);
             console.log(response);
 

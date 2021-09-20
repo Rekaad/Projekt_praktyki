@@ -13,6 +13,7 @@ import Rejestracja from "./pages/Rejestracja";
 import AddPytania from "./components/layout/subjects/AddPytania";
 import ShowTest from "./components/layout/subjects/ShowTest";
 import SolveTest from "./components/layout/subjects/SolveTest";
+import PasswordTest from "./components/layout/subjects/PasswordTest";
 
 function App() {
   return (
@@ -65,6 +66,10 @@ function App() {
       
       <Route path="/Solve">
         <SolveTest/>
+      </Route>
+
+      <Route path="/Password">
+        <PasswordTest/>
       </Route>
 
       </Switch>

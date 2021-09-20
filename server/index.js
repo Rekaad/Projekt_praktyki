@@ -238,11 +238,12 @@ app.post('/register', (req,res)=>{
      app.post('/hasloT', (req,res)=>{
    
             const haslo =req.body.haslo;
-            
+            const id =req.body.testId;
              pool.query(
-                 "SELECT * FROM test WHERE haslotest =$1",
-                 [haslo],
+                 "SELECT * FROM test WHERE haslotest =$1 AND testid=$2",
+                 [haslo,id],
                  (err,result)=> {
+                   console.log
                      if(err)
                     {
                        res.send({ err: err});
@@ -252,7 +253,7 @@ app.post('/register', (req,res)=>{
                             res.send(result.rows);
                           
                       } else {
-                        res.send({ message: "Błędne hasło" });
+                        res.send({ message: "Błędne hasło!" });
                       }
                     }
                   );
