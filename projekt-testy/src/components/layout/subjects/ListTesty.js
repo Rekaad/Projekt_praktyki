@@ -95,7 +95,7 @@ function ListTesty(props){
         <td><button>Edytuj</button></td>
         <td><button onClick={() => deleteTest(test.testid)}>Usun</button></td>
         
-        <td><button onClick={() => dajTestId(test.testid)}><Link to={{
+        <td><button onMouseOver={() => dajTestId(test.testid)}><Link to={{
           pathname: "/Show",
           state: dataId // your data array of objects
   }}> Rozwiaz </Link></button></td>
@@ -123,6 +123,7 @@ function ListTesty(props){
         <th scope="col">Nazwa(moze podglad po kliknieciu) </th>
         
         <th scope="col"> Podgląd</th>
+        
       </tr>
     </thead>
     <tbody>
@@ -130,10 +131,10 @@ function ListTesty(props){
       {testy.map(test => (
         <tr key={test.testid}>
           <td>{test.nazwatest}</td>
-          <td><button onClick={() => dajTestId(test.testid)}><Link to={{
+          <td><button onMouseOver={() => dajTestId(test.testid)}><Link to={{
           pathname: "/Show",
           state: dataId // your data array of objects
-  }}> Rozwiaz </Link></button></td> 
+            }}> Rozwiaz </Link></button></td> 
         </tr>
       ))}
       

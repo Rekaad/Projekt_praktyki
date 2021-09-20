@@ -234,40 +234,6 @@ app.post('/register', (req,res)=>{
             }
           );
         });
-        app.post('/logins', (req,res)=>{
-   
-    const login =req.body.login;
-    const haslo =req.body.haslo;
-    
-    
-     pool.query(
-         "SELECT * FROM uzytkownik WHERE login =$1",
-         [login],
-         (err,result)=> {
-             if(err)
-            {
-               res.send({ err: err});
-             } 
-             
-
-             if(result.rows.length >0){
-                bcrypt.compare(haslo, result.rows[0].haslo, (error, response) => {
-
-                if (response) {
-                    req.session.user= result.rows;
-                    console.log(req.session.user);
-                    res.send(result.rows);
-                  } else {
-                    res.send({ message: "Zły login lub hasło" });
-                  }
-                });
-              } else {
-                
-                res.send({ message: "Użytkownik nie istnieje" });
-              }
-            }
-          );
-        });
     
      app.post('/hasloT', (req,res)=>{
    
