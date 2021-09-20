@@ -14,7 +14,7 @@ function NewTestForm(){
 
   useEffect(() => {
     Axios.get("http://localhost:5000/logins").then((response) => {
-      if (response.data.loggedIn == true) {
+      if (response.data.loggedIn === true) {
         setUzytykownik(response.data.user[0].uzytkownikid);
         console.log(response.data.user[0].uzytkownikid);
         

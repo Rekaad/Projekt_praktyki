@@ -7,14 +7,16 @@ import Axios from "axios";
 
 function ListTesty(props){
   
+ 
+
   const [testy,setTesty] = useState([]);
   
   //const idta = props;
   //usuwanie testu
-
+ 
 
   const [role, setRole] = useState("");
-
+  const [dataId, setDataId] = useState("");
 
   Axios.defaults.withCredentials = true;
   useEffect(() => {
@@ -57,13 +59,20 @@ function ListTesty(props){
     //setTesty(testy.filter(test => test.przedmiotid !== idt));
   }
 
+  const dajTestId = async (id) => {
+
+    setDataId(id);
+    //console.log(dataId);
+  }
+
   useEffect(() =>{
+    console.log(props.idta);
     getTesty(props.idta);
   },[]);
 
   console.log(testy);
 
-  if(role == "logged"){
+  if(role === "logged"){
     return (
     <section>
       <PrzyciskWstecz />
@@ -85,7 +94,11 @@ function ListTesty(props){
         {/*<td><EditTest/></td> */}
         <td><button>Edytuj</button></td>
         <td><button onClick={() => deleteTest(test.testid)}>Usun</button></td>
-        <td><button><Link to="/Solve"> Rozwiaz </Link></button></td>
+        
+        <td><button onClick={() => dajTestId(test.testid)}><Link to={{
+          pathname: "/Show",
+          state: dataId // your data array of objects
+  }}> Rozwiaz </Link></button></td>
       </tr>
     ))}
     
@@ -117,7 +130,10 @@ function ListTesty(props){
       {testy.map(test => (
         <tr key={test.testid}>
           <td>{test.nazwatest}</td>
-          <td><button><Link to="/Solve"> Rozwiaz </Link></button></td>
+          <td><button onClick={() => dajTestId(test.testid)}><Link to={{
+          pathname: "/Show",
+          state: dataId // your data array of objects
+  }}> Rozwiaz </Link></button></td> 
         </tr>
       ))}
       
