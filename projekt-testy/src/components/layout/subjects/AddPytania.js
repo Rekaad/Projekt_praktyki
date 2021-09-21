@@ -132,7 +132,7 @@ function AddPytania() {
         body: JSON.stringify(bodypytanie)
       });
 
-      window.location = "/";
+     window.location = "/";
       //console.log(response);
      // console.log(body);
 
@@ -276,10 +276,10 @@ useEffect(() =>{
               <label htmlFor='Poprawna'> Poprawna: </label>
               <select required name='Poprawna' value={item.Poprawna} onChange={(e) =>{const wybrane = e.target.value; setPoprawna(wybrane); onChange(index, e)}}>
                   <option style={{display:"none"}} disabled selected value=""> Wybierz poprawna </option>
-                  <option value='1'>1</option>
-                  <option value='2'>2</option>
-                  <option value='3'>3</option>
-                  <option value='4'>4</option>
+                  <option value={item.Odp1}>1</option>
+                  <option value={item.Odp2}>2</option>
+                  <option value={item.Odp3}>3</option>
+                  <option value={item.Odp4}>4</option>
               </select>
               {item.errors.Poprawna && (
                 <div className="znowu-zle">{item.errors.Poprawna}</div>
@@ -295,6 +295,7 @@ useEffect(() =>{
                 <button class="button buttonT" type="button" onClick={handleAddLink}>Dodaj pytanie</button>
             </div>
         <button class="button buttonP">Zapisz pytania</button>
+        
         </form>
       </div>
     </Card>

@@ -10,6 +10,7 @@ function ListTesty(props){
  
 
   const [testy,setTesty] = useState([]);
+  //const [lista,setLista] = useState("");
   
   //const idta = props;
   //usuwanie testu
@@ -44,7 +45,6 @@ function ListTesty(props){
     }
   }
 
-
   const getTesty = async(idt) => {
       // testy.przedmiotid;
     try {
@@ -56,7 +56,8 @@ function ListTesty(props){
     } catch (err) {
       console.error(err.message);
     }
-    //setTesty(testy.filter(test => test.przedmiotid !== idt));
+  
+  
   }
 
   const dajTestId = async (id) => {
@@ -68,6 +69,7 @@ function ListTesty(props){
   useEffect(() =>{
     console.log(props.idta);
     getTesty(props.idta);
+
   },[]);
 
   console.log(testy);
@@ -78,11 +80,12 @@ function ListTesty(props){
       <PrzyciskWstecz />
       <Card>
       <h1>Lista Testów</h1>
+
       <table class="table">
   <thead>
     <tr>
-      <th scope="col">Nazwa(moze podglad po kliknieciu) </th>
-      <th scope="col"> Edycja</th>
+      <th scope="col">Nazwa </th>
+      {/*<th scope="col"> Edycja</th>*/}
       <th scope="col"> Usuwanie</th>
       <th scope="col"> Podgląd</th>
     </tr>
@@ -91,14 +94,16 @@ function ListTesty(props){
     {testy.map(test => (
       <tr key={test.testid}>
         <td>{test.nazwatest}</td>
-        {/*<td><EditTest/></td> */}
+        {/*<td><EditTest/></td> 
         <td><button>Edytuj</button></td>
+        */}
+        
         <td><button onClick={() => deleteTest(test.testid)}>Usun</button></td>
         
         <td><button onMouseOver={() => dajTestId(test.testid)}><Link to={{
           pathname: "/Show",
           state: dataId // your data array of objects
-  }}> Rozwiaz </Link></button></td>
+  }}> Podgląd wyników </Link></button></td>
       </tr>
     ))}
     
@@ -120,9 +125,9 @@ function ListTesty(props){
         <table class="table">
     <thead>
       <tr>
-        <th scope="col">Nazwa(moze podglad po kliknieciu) </th>
+        <th scope="col">Nazwa </th>
         
-        <th scope="col"> Podgląd</th>
+        <th scope="col"> Rozwiaz</th>
         
       </tr>
     </thead>
