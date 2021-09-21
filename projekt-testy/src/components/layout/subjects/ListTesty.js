@@ -82,14 +82,7 @@ function ListTesty(props){
       <h1>Lista Testów</h1>
 
       <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Nazwa </th>
-      {/*<th scope="col"> Edycja</th>*/}
-      <th scope="col"> Usuwanie</th>
-      <th scope="col"> Podgląd</th>
-    </tr>
-  </thead>
+  
   <tbody>
     {testy.map(test => (
       <tr key={test.testid}>
@@ -123,14 +116,7 @@ function ListTesty(props){
         <Card>
         <h1>Lista Testów</h1>
         <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Nazwa </th>
-        
-        <th scope="col"> Rozwiaz</th>
-        
-      </tr>
-    </thead>
+   
     <tbody>
       
       {testy.map(test => (

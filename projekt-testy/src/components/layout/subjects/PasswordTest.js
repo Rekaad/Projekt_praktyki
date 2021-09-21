@@ -57,7 +57,7 @@ function PasswordTest(props){
   return (
     <section>
       <PrzyciskWstecz />
-      <Card>
+      
       
       <div className="Password">
                 <h1>Wpisz hasło do testu</h1>
@@ -70,7 +70,7 @@ function PasswordTest(props){
                 <h1>{Status}</h1>
          </div>
 
-      </Card>
+     
 
       </section>
   );

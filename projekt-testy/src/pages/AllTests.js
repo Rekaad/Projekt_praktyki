@@ -22,7 +22,7 @@ const DUMMY_DATA = [
 function AllTests() {
   return (
     <section>
-      <h1> All Tests</h1>
+      <h1> Kategorie testów</h1>
       <SubjectList subjects={DUMMY_DATA}/>
     </section>
   );

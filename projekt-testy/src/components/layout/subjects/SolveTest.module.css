@@ -1,10 +1,14 @@
-.przycisk{
-    color: red;
-    background-color: seagreen;
-    display: block;
-    font: size 20px; ;
-}
 
 .test{
-    color: red;
+    
+   margin-left: 2rem ;
+    padding-left:  2rem;
+    padding-left:  2rem;
+    
+}
+.test h3{
+    
+   margin-top: 20rem ;
+    padding-left:  2rem;
+    padding-left:  2rem;
 }

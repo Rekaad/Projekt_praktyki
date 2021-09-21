@@ -67,7 +67,7 @@ function NewTestForm(){
             </div>    
             <div>
               <label htmlFor='haslo'>Haslo: </label>
-              <input type='text' value={haslotest} onChange={e => setHaslo(e.target.value)}/>
+              <input type='password' value={haslotest} onChange={e => setHaslo(e.target.value)}/>
             </div>        
             <div>
                 <button class="button buttonP" >Stwórz test</button>

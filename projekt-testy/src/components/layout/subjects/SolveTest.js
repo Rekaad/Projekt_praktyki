@@ -8,11 +8,11 @@ const SolveTest = ( {handleAnswer, data : {trescpytania, odpowiedz1,odpowiedz2,o
 
   return(
 
-  <div>
+  <div className="test">
+      <h1> Wybierz poprawną odpowiedź</h1>
       <h3 className={classes.test}>{trescpytania}</h3>
-      <h3> {poprawna} - to jest poprawna jakby co</h3>
       {losowepytania.map(answer => (
-        <button className={`${poprawna === answer ? 'przycisk' : ''}`} onClick={()=> handleAnswer(answer)}>{answer}</button>
+      <p>  <button class="button buttonO" onClick={()=> handleAnswer(answer)}>{answer}</button></p>
       ))}
      </div>
   

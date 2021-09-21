@@ -118,12 +118,12 @@ function PasswordTest(props){
   if(role==="visitor"){
   return koniecQuiz ? (
     <Card>
-    <div>
+    <div class="end">
     <h1> Twój wynik to: {wynik} </h1>
     <form onSubmit={getRezultat}>
     <label for="htmlFor"> Numer albumu: </label>
     <input type='text' required value={numeralbumu} onChange={e => setAlbum(e.target.value)}/>
-      <button> Wyślij wynik</button>
+      <p><button> Wyślij wynik</button></p>
       </form>
     </div>
     </Card>
