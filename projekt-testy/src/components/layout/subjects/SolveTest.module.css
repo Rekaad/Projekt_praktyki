@@ -1,0 +1,10 @@
+.przycisk{
+    color: red;
+    background-color: seagreen;
+    display: block;
+    font: size 20px; ;
+}
+
+.test{
+    color: red;
+}

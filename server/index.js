@@ -71,6 +71,14 @@ app.post("/pytanie", async(req,res) => {
 
 })
 
+app.post("/uczestnik", async(req,res) => {
+
+    const {dataId, numeralbumu, wynik} = req.body;
+    console.log(req.body);
+    const newTodo = await pool.query("INSERT INTO uczestnik (numeralbumu,rezultat,testid) VALUES($1,$2,$3)",[numeralbumu,wynik,dataId]);
+    res.json(newTodo.rows);
+})
+
 //get all todo
 
 app.get("/test", async(req,res) => {
@@ -91,12 +99,33 @@ app.get("/pytanie", async(req,res) => {
     }
 });
 
+app.get("/uczestnik/testid/:id", async(req,res) => {
+    try {
+        const {id} = req.params;
+        const allTodos = await pool.query("SELECT * FROM uczestnik WHERE testid= $1",[id]);
+        res.json(allTodos.rows);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
 //get a todo where przedmiotid
 
 app.get("/test/przedmiotid/:id", async(req,res) =>{
     try {
         const {id} = req.params;
         const todo = await pool.query("SELECT * FROM test WHERE przedmiotid = $1", [id]);
+
+        res.json(todo.rows);
+    } catch (err) {
+        console.error(err.message);
+    }
+})
+
+app.get("/test/nazwatest/:id", async(req,res) =>{
+    try {
+        const {id} = req.params;
+        const todo = await pool.query("SELECT * FROM test WHERE nazwatest LIKE '%$1%'", [id]);
 
         res.json(todo.rows);
     } catch (err) {
