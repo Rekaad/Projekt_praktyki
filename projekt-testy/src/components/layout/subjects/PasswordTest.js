@@ -6,7 +6,7 @@ import ListTesty from "./ListTesty";
 import Axios from 'axios'
 import { useHistory } from "react-router-dom"
 
-function ShowTest(props){
+function PasswordTest(props){
 
   const location = useLocation();
   const dataId = location.state;
@@ -29,6 +29,7 @@ function ShowTest(props){
     //console.log(dataId);
   }
   let history = useHistory();
+
   const logins = () => {
     Axios.post("http://localhost:5000/hasloT",{
         testId: testId,
@@ -75,4 +76,4 @@ function ShowTest(props){
   );
 };
 
-export default ShowTest;
+export default PasswordTest;

@@ -96,7 +96,7 @@ function ListTesty(props){
         <td><button onClick={() => deleteTest(test.testid)}>Usun</button></td>
         
         <td><button onMouseOver={() => dajTestId(test.testid)}><Link to={{
-          pathname: "/Show",
+          pathname: "/Password",
           state: dataId // your data array of objects
   }}> Rozwiaz </Link></button></td>
       </tr>

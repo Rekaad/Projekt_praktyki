@@ -259,6 +259,32 @@ app.post('/register', (req,res)=>{
                   );
                 });
 
+app.post('/edits', (req,res)=>{
+   
+            const haslo =req.body.haslo;
+            const login =req.body.login;
+            
+            bcrypt.hash(haslo, saltRounds, (err, hash) => {
+              if (err) {
+                console.log(err);
+              }
+             pool.query(
+              "UPDATE uzytkownik SET haslo =$1 WHERE login =$2",[hash,login],
+                 (err,result)=> {
+                  if(err)
+                  {res.send(result);
+                      
+                  }else{
+                    res.send({ message: "Hasło zostało zapisane!" });
+                  }
+           }
+           );
+          });
+       });
+
+                
+
+
 
 app.listen(5000, ()=> {
     console.log("serwer wystartowal na porcie 5000");
